@@ -8,15 +8,17 @@ from segment_anything import SamPredictor, sam_model_registry
 
 
 def main():
-    model_type = 'vit_h'
+    model_type = 'vit_b'
     checkpoint_path = r'D:\Git\segment-anything\models\sam_vit_h_4b8939.pth'
-    p_img = r'\\192.168.0.225\algo_group\FaceAttributes\FaceMask\Positive\Polygon-iteration4\images\driving_videos\Dana_Driving_28APR2020_Video9_3.png'
+    checkpoint_path = r'D:\Git\segment-anything\models\sam_vit_b_01ec64.pth'
+    p_img = r'\\192.168.0.225\algo_group\FaceAttributes\FaceMask\raw_data\Positive\Polygon-iteration4\images\driving_videos\Dana_Driving_28APR2020_Video9_3.png'
 
     assert os.path.isfile(p_img)
     assert os.path.isfile(checkpoint_path)
 
     img = cv2.imread(p_img, cv2.IMREAD_UNCHANGED)
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+    img = np.tile(img, (10, 1, 1, 1))
 
     pt_prompt = np.array([(465, 570)])
 
